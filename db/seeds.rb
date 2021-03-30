@@ -1,3 +1,15 @@
+# Seed Your Database 
+#delete all users, items, and deliverys from the database
+#and then create them whenever we run the file to remove any duplicates
+Item.destroy_all
+
+#reset the IDS so they start at 1
+Item.reset_pk_sequence
+
+
+
+
+#ITEM
 Item.create(item_name: "fudge brownie", description: "warm chocolate fudge brownie with chocolate chip bits", price: 5)
 Item.create(item_name: "salted carmel brownie", description: "double chocolate brownie featuring homemade carmel sauce", price: 5)
 Item.create(item_name: "chocolate chip cookie", description: "fresh classic made with jumbo chips", price: 3)
@@ -7,5 +19,7 @@ Item.create(item_name: "lemon angel food cupcake", description: "light and airy 
 Item.create(item_name: "chocolate chip muffin", description: "soft and fluffy loaded chocolate chip muffin", price: 7)
 Item.create(item_name: "classic blueberry muffin", description: "soft and light and loaded with fresh blueberries", price: 7)
 
+#DELIVERY
+
 puts "successfully seeded database"
-# Seed Your Database 
+

@@ -1,3 +1,3 @@
-class Delivery
+class Delivery < ActiveRecord::Base
 
 end
