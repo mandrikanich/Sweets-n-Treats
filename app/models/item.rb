@@ -1,3 +1,3 @@
-class Item
-
+class Item < ActiveRecord::Base
+    
 end
