@@ -49,7 +49,7 @@ class Interface
     @user.reload 
     system 'clear'
     sleep 2 
-    puts "welcome #{user.username}"
+    puts "welcome #{user.user_name}"
     prompt.select "What do you want to do?" do |menu|
         menu.choice "See all deliveries", -> {see_all_deliveries_helper}
         menu.choice "See all items", -> {see_all_items_helper}

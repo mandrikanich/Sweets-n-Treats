@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
         until user_instance
             puts "incorrect username or password"
             sleep 1
-            system 'clear'
             user_instance = User.login_helper_class_method
         end
 
@@ -24,7 +23,7 @@ class User < ActiveRecord::Base
         username = STDIN.gets.chomp
         puts "What is your password?"
         password = STDIN.gets.chomp 
-        user_instance = User.create({username: username, password: password})
+        user_instance = User.create({user_name: username, password: password})
     end
 
     def display_items
