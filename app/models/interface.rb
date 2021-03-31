@@ -1,5 +1,10 @@
 class Interface
-    attr_accessor :user 
+    attr_accessor :user
+    attr_reader :prompt  
+
+    def initialize 
+        @prompt = TTY::Prompt.new 
+    end
     
     
     def welcome
@@ -10,18 +15,20 @@ class Interface
    def ask_for_login_or_register
      puts "Would you like to login or register?"
      answer = STDIN.gets.chomp 
-     if answer == "login"
-        #do some login logic
-       login_helper
-     elseif answer == "register"
+     #if answer == "login"
+       #login_helper
+     #elseif answer == "register"
        #do some register logic
-       register_helper 
-     else
-        generic_warning_message
+       #register_helper 
+     #else
+        #generic_warning_message
         #error message
+     #end
+       prompt.select "Would you like to login or register" do |menu|
+        menu.choice "login", -> { login_helper}
+        menu.choice "register", -> {register_helper}
+       end
      end
-     
-   end
 
    def login_helper
     puts "typed login"
@@ -39,7 +46,23 @@ class Interface
    end
 
    def main_menu 
-    puts "welcome #{user.username}"
+    @user.reload 
+    system 'clear'
+    sleep 2 
+    puts "welcome #{user.user_name}"
+    prompt.select "What do you want to do?" do |menu|
+        menu.choice "See all deliveries", -> {see_all_deliveries_helper}
+        menu.choice "See all items", -> {see_all_items_helper}
+        menu.choice "Exit app", -> {puts "Goodbye"}
+    end
+   end
+
+   def see_all_deliveries_helper 
+   end
+
+   def see_all_items_helper 
+       @user.display_items
+       main_menu 
    end
 
    def run 
