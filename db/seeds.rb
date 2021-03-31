@@ -13,7 +13,9 @@ Delivery.reset_pk_sequence
 #USER
 matt = User.create(user_name: "Matt Kindt", address: "123 sparrow lane")
 
-
+10.times do 
+    Category.create(name: Faker::Name.name)
+end
 
 #ITEM
 item1 = Item.create(item_name: "fudge brownie", description: "warm chocolate fudge brownie with chocolate chip bits", price: 5)
