@@ -1,5 +1,10 @@
 require_relative './config/environment'
 require 'sinatra/activerecord/rake'
+#require 'tty-prompt'
+
+#puts 'clear'
+
+#Cli.new.welcome
 
 desc "Start our app console"
 task :console do
@@ -9,6 +14,11 @@ task :console do
   Pry.start
 end
 
+desc "Start our app"
+task :start do
+  interface = Interface.new
+  interface.run
+end
 
 namespace :remind_me_about do
 
