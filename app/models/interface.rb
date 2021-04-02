@@ -1,5 +1,5 @@
 class Interface
-    attr_accessor :user
+    attr_accessor :user_name
     attr_reader :prompt  
 
     def initialize 
@@ -8,13 +8,13 @@ class Interface
     
     
     def welcome
-        puts "hi there!"
-        puts "come get some sweets n treats"
+        puts "hi there!".yellow
+        puts "come get some sweets n treats".blue
     end
 
    def ask_for_login_or_register
-     puts "Would you like to login or register?"
-     answer = STDIN.gets.chomp 
+     #puts "Would you like to login or register?"
+     #answer = STDIN.gets.chomp 
      #if answer == "login"
        #login_helper
      #elseif answer == "register"
@@ -33,7 +33,7 @@ class Interface
    def login_helper
     puts "typed login"
     @user = User.login_helper_class_method 
-    puts "welcome #{user.username}" 
+    puts "welcome #{@user.user_name}" 
    end
 
    def register_helper 
@@ -49,7 +49,7 @@ class Interface
     @user.reload 
     system 'clear'
     sleep 2 
-    puts "welcome #{user.user_name}"
+    puts "welcome #{@user.user_name}"
     prompt.select "What do you want to do?" do |menu|
         menu.choice "See all deliveries", -> {see_all_deliveries_helper}
         menu.choice "See all items", -> {see_all_items_helper}
@@ -58,10 +58,15 @@ class Interface
    end
 
    def see_all_deliveries_helper 
+    @user.display_deliveries 
+    main_menu 
    end
 
+
    def see_all_items_helper 
-       @user.display_items
+       selected_items = Item.display_items
+       binding.pry
+       selected_items.add_item_to_delivery("yes", @user.id, selected_items.id)
        main_menu 
    end
 
